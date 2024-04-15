@@ -22,7 +22,7 @@ monitors:
     method: GET # default=GET
     expectStatus: 200 # operational status, default=200
     followRedirect: false # should fetch follow redirects, default=false
-    linkable: false # allows the title to be a link, default=true
+    linkable: true # allows the title to be a link, default=true
 
   - id: inaodeng.com
     name: inaodeng.com
@@ -36,6 +36,30 @@ monitors:
     name: email.naodeng.com.cn
     description: 'Built for anything connected to the Internet.'
     url: 'https://email.naodeng.com.cn'
+    method: GET
+    expectStatus: 200
+    linkable: true # allows the title to be a link, default=true
+
+  - id: lobe.naodeng.com.cn
+    name: lobe.naodeng.com.cn
+    description: 'Built for anything connected to the Internet.'
+    url: 'https://lobe.naodeng.com.cn'
+    method: GET
+    expectStatus: 200
+    linkable: true # allows the title to be a link, default=true
+
+  - id: chat.naodeng.com.cn
+    name: chat.naodeng.com.cn
+    description: 'Built for anything connected to the Internet.'
+    url: 'https://chat.naodeng.com.cn'
+    method: GET
+    expectStatus: 200
+    linkable: true # allows the title to be a link, default=true
+  
+  - id: openai.naodeng.com.cn
+    name: openai.naodeng.com.cn
+    description: 'Built for anything connected to the Internet.'
+    url: 'https://openai.naodeng.com.cn'
     method: GET
     expectStatus: 200
     linkable: true # allows the title to be a link, default=true
