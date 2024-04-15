@@ -67,7 +67,7 @@ monitors:
   - id: deeplx.naodeng.com.cn
     name: deeplx.naodeng.com.cn
     description: 'Built for anything connected to the Internet.'
-    url: 'https://deeplx.naodeng.com.cn'
+    url: 'https://deeplx.naodeng.com.cn/translate'
     method: GET
     expectStatus: 200
     linkable: true # allows the title to be a link, default=true
