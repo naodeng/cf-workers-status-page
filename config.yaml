@@ -1,7 +1,7 @@
 settings:
   title: 'Status Page'
   url: 'status.naodeng.com.cn' # used for Slack messages
-  logo: logo-192x192.png # image in ./public/ folder
+  logo: NAO_logo-192x192.png # image in ./public/ folder
   daysInHistogram: 90 # number of days you want to display in histogram
   collectResponseTimes: true # collects avg response times from CRON locations
 
@@ -45,7 +45,7 @@ monitors:
     description: 'Built for anything connected to the Internet.'
     url: 'https://lobe.naodeng.com.cn'
     method: GET
-    expectStatus: 200
+    expectStatus: 302
     linkable: true # allows the title to be a link, default=true
 
   - id: chat.naodeng.com.cn
@@ -53,13 +53,13 @@ monitors:
     description: 'Built for anything connected to the Internet.'
     url: 'https://chat.naodeng.com.cn'
     method: GET
-    expectStatus: 200
+    expectStatus: 302
     linkable: true # allows the title to be a link, default=true
   
-  - id: openai.naodeng.com.cn
-    name: openai.naodeng.com.cn
+  - id: azure.naodeng.com.cn
+    name: azure.naodeng.com.cn
     description: 'Built for anything connected to the Internet.'
-    url: 'https://openai.naodeng.com.cn'
+    url: 'https://azure.naodeng.com.cn/v1/models'
     method: GET
     expectStatus: 200
     linkable: true # allows the title to be a link, default=true
