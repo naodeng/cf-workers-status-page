@@ -63,3 +63,11 @@ monitors:
     method: GET
     expectStatus: 200
     linkable: true # allows the title to be a link, default=true
+
+  - id: deeplx.naodeng.com.cn
+    name: deeplx.naodeng.com.cn
+    description: 'Built for anything connected to the Internet.'
+    url: 'https://deeplx.naodeng.com.cn'
+    method: GET
+    expectStatus: 200
+    linkable: true # allows the title to be a link, default=true
