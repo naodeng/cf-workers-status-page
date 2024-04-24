@@ -78,4 +78,12 @@ monitors:
     url: 'https://analytics.naodeng.com.cn'
     method: GET
     expectStatus: 200
-    linkable: true # allows the title to be a link, default=true  
+    linkable: true # allows the title to be a link, default=true 
+
+  - id: unsplash.naodeng.com.cn
+    name: unsplash.naodeng.com.cn
+    description: 'Built for anything connected to the Internet.'
+    url: 'https://unsplash.naodeng.com.cn'
+    method: GET
+    expectStatus: 302
+    linkable: true # allows the title to be a link, default=true 
