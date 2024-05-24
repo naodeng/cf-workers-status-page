@@ -87,3 +87,11 @@ monitors:
     method: GET
     expectStatus: 302
     linkable: true # allows the title to be a link, default=true 
+
+  - id: gemini.naodeng.com.cn
+    name: gemini.naodeng.com.cn
+    description: 'Built for anything connected to the Internet.'
+    url: 'https://gemini.naodeng.com.cn'
+    method: GET
+    expectStatus: 200
+    linkable: true # allows the title to be a link, default=true 
