@@ -75,7 +75,7 @@ monitors:
   - id: analytics.naodeng.com.cn
     name: analytics.naodeng.com.cn
     description: 'A website for analytics.'
-    url: 'https://analytics.naodeng.com.cn'
+    url: 'https://analytics.naodeng.com.cn/websites/b3b285c9-3c35-4398-9252-91bb70560b84'
     method: GET
     expectStatus: 200
     linkable: true # allows the title to be a link, default=true 
