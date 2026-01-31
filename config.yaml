@@ -15,6 +15,23 @@ settings:
   dayInHistogramNotOperational: ' incident(s)' # xx incident(s) recorded
 
 monitors:
+  - id: inaodeng.com
+    name: inaodeng.com
+    description: 'Personal Blog'
+    url: 'https://inaodeng.com'
+    method: GET
+    expectStatus: 200
+    linkable: true # allows the title to be a link, default=true
+
+  - id: qaprompt.inaodeng.com # unique identifier
+    name: Awesome QA Prompt
+    description: 'Professional Quality Assurance AI Prompt Library.' # default=empty
+    url: 'https://qaprompt.inaodeng.com/' # URL to fetch
+    method: GET # default=GET
+    expectStatus: 200 # operational status, default=200
+    followRedirect: false # should fetch follow redirects, default=false
+    linkable: true # allows the title to be a link, default=true
+
   - id: naodeng.com.cn # unique identifier
     name: naodeng.com.cn
     description: 'You write code. They handle the rest.' # default=empty
@@ -22,14 +39,6 @@ monitors:
     method: GET # default=GET
     expectStatus: 200 # operational status, default=200
     followRedirect: false # should fetch follow redirects, default=false
-    linkable: true # allows the title to be a link, default=true
-
-  - id: inaodeng.com
-    name: inaodeng.com
-    description: 'Built for anything connected to the Internet.'
-    url: 'https://inaodeng.com'
-    method: GET
-    expectStatus: 200
     linkable: true # allows the title to be a link, default=true
 
   - id: email.naodeng.com.cn
