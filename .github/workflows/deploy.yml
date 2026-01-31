@@ -22,20 +22,21 @@ jobs:
     - run: yarn build
       env:
         NODE_ENV: production
+    - name: Prepare production wrangler.toml
+      env:
+        CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+        CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+      run: |
+        (npx wrangler kv:namespace create KV_STATUS_PAGE 2>/dev/null) || true
+        KV_NAMESPACE_ID=$(curl -s -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/storage/kv/namespaces" | node -e "try{const d=JSON.parse(require('fs').readFileSync('/dev/stdin','utf8'));const list=(d.result||[]);const kv=list.find(k=>(k.title||'').includes('KV_STATUS_PAGE'));process.stdout.write(kv&&kv.id?kv.id:'');}catch(e){process.stdout.write('');}")
+        if [ -z "$KV_NAMESPACE_ID" ]; then echo "::error::Could not get KV namespace ID. Check CF_ACCOUNT_ID and CF_API_TOKEN secrets, and that a namespace with KV_STATUS_PAGE in the title exists."; exit 1; fi
+        echo "[env.production]" >> wrangler.toml
+        echo "kv_namespaces = [{binding=\"KV_STATUS_PAGE\", id=\"$KV_NAMESPACE_ID\"}]" >> wrangler.toml
     - name: Publish
       uses: cloudflare/wrangler-action@v3
       with:
         apiToken: ${{ secrets.CF_API_TOKEN }}
         accountId: ${{ secrets.CF_ACCOUNT_ID }}
-        preCommands: |
-          (wrangler kv:namespace create KV_STATUS_PAGE 2>/dev/null) || true
-          KV_NAMESPACE_ID=$(curl -s -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/storage/kv/namespaces" | node -e "try{const d=JSON.parse(require('fs').readFileSync('/dev/stdin','utf8'));const list=(d.result||[]);const kv=list.find(k=>(k.title||'').includes('KV_STATUS_PAGE'));process.stdout.write(kv&&kv.id?kv.id:'');}catch(e){process.stdout.write('');}")
-          if [ -z "$KV_NAMESPACE_ID" ]; then echo "::error::Could not get KV namespace ID. Check CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID, and that a namespace with KV_STATUS_PAGE in the title exists."; exit 1; fi
-          echo "[env.production]" >> wrangler.toml
-          echo "kv_namespaces = [{binding=\"KV_STATUS_PAGE\", id=\"$KV_NAMESPACE_ID\"}]" >> wrangler.toml
         postCommands: |
           yarn kv-gc
         environment: production
-      env:
-        CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
-        CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
