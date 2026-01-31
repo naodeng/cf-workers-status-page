@@ -1,6 +1,6 @@
 name = "cf-workers-status-page"
 workers_dev = true
-main = "index.js"
+main = "worker-entry.js"
 compatibility_date = "2021-07-23"
 
 [triggers]
