@@ -1,5 +1,5 @@
 import React from 'react'
-import config from '../../config.yaml'
+import config from '../../config.js'
 import MonitorDayAverage from './monitorDayAverage'
 
 export default function MonitorHistogram({ monitorId, kvMonitor }) {

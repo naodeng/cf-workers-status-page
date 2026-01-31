@@ -1,4 +1,4 @@
-import config from '../../config.yaml'
+import config from '../../config.js'
 import { locations } from '../functions/locations'
 
 const classes = {
