@@ -27,8 +27,8 @@ pnpm run dev
 ## 4. 部署（GitHub Actions）
 
 - 在仓库 **Settings → Secrets and variables → Actions** 添加：
-  - `CLOUDFLARE_API_TOKEN`（必填）
-  - `CLOUDFLARE_ACCOUNT_ID`（推荐，与 wrangler 一致）
+  - `CLOUDFLARE_API_TOKEN`（必填）：在 [Cloudflare API Tokens](https://dash.cloudflare.com/profile/api-tokens) 创建，需包含 **Account → Workers Scripts → Edit** 及 **Account → Account Settings → Read**；若希望日志中显示邮箱可勾选 **User → User Details → Read**。
+  - `CLOUDFLARE_ACCOUNT_ID`（**必填**）：须与上述 Token 所属账号一致，否则会报 Authentication error / account_id 不匹配。在 [Cloudflare Dashboard](https://dash.cloudflare.com) 右侧或 API Tokens 页可看到当前 Account ID。
 - 推送 **main** 或 **master** 分支即可触发部署（`.github/workflows/publish.yml`）。
 
 ## 5. 自定义域名
