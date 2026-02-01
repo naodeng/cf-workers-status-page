@@ -41,6 +41,11 @@ const handler: ExportedHandler<Env> = {
         // Every two minutes
         await handleCronTrigger(env, ctx)
         break
+      case '*/5 * * * *':
+        // Every five minutes（与 wrangler.toml [env.production.triggers] 一致）
+        await handleCronTrigger(env, ctx)
+        await handleRemoteMonitors(env)
+        break
       case '*/10 * * * *':
         // Every ten minutes
         await handleRemoteMonitors(env)
