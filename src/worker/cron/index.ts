@@ -80,7 +80,7 @@ export async function handleCronTrigger(env: Env, ctx: ExecutionContext) {
       time: Date.now(),
     }
 
-    const targetMonitorHistoryDataChecksItem = kvData.monitorHistoryData?.[monitor.id]?.checks.find((item) => {
+    const targetMonitorHistoryDataChecksItem = kvData.monitorHistoryData?.[monitor.id]?.checks.find((item: MonitorDailyChecksItem) => {
       return item.date === checkDay
     })
 
@@ -120,7 +120,7 @@ export async function handleCronTrigger(env: Env, ctx: ExecutionContext) {
     }
 
     kvData.monitorHistoryData[monitor.id] = {
-      checks: [...(kvData.monitorHistoryData[monitor.id]?.checks || []).filter((item) => {
+      checks: [...(kvData.monitorHistoryData[monitor.id]?.checks || []).filter((item: MonitorDailyChecksItem) => {
         return item.date !== monitorHistoryDataChecksItem.date
       }), monitorHistoryDataChecksItem],
       firstCheck: kvData.monitorHistoryData[monitor.id]?.firstCheck || checkDay,

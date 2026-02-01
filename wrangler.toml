@@ -5,8 +5,8 @@ main = "./src/worker/index.ts"
 compatibility_flags = [ "streams_enable_constructors" ]
 compatibility_date = "2021-09-29"
 workers_dev = true
-account_id = ""
-kv_namespaces = [ { binding = "KV_STORE", id = "YOUR_KV_NAMESPACE_ID" } ]
+account_id = "1c7bfcd21b49416992bd7fb66a72c45d"
+kv_namespaces = [ { binding = "KV_STORE", id = "1c7bfcd21b49416992bd7fb66a72c45d" } ]
 
 [site]
 bucket = "./dist/client"
@@ -15,7 +15,7 @@ bucket = "./dist/client"
 port = 3000
 
 [env.production]
-kv_namespaces = [ { binding = "KV_STORE", id = "YOUR_KV_NAMESPACE_ID" } ]
+kv_namespaces = [ { binding = "KV_STORE", id = "1c7bfcd21b49416992bd7fb66a72c45d" } ]
 
 [env.production.triggers]
 crons = [
