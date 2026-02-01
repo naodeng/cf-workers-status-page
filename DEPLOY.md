@@ -33,10 +33,21 @@ pnpm run dev
 
 ## 4. 部署（GitHub Actions）
 
-- 在仓库 **Settings → Secrets and variables → Actions** 添加：
-  - `CLOUDFLARE_API_TOKEN`（必填）：在 [Cloudflare API Tokens](https://dash.cloudflare.com/profile/api-tokens) 创建，需包含 **Account → Workers Scripts → Edit** 及 **Account → Account Settings → Read**；若希望日志中显示邮箱可勾选 **User → User Details → Read**。
-  - `CLOUDFLARE_ACCOUNT_ID`（**必填**）：须与上述 Token 所属账号一致，否则会报 Authentication error / account_id 不匹配。在 [Cloudflare Dashboard](https://dash.cloudflare.com) 右侧或 API Tokens 页可看到当前 Account ID。
-- 推送 **main** 或 **master** 分支即可触发部署（`.github/workflows/publish.yml`）。
+在仓库 **Settings → Secrets and variables → Actions** 添加：
+
+| Secret                  | 必填 | 说明                                                                                                                                                                                                                                                                                      |
+| ----------------------- | ---- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `CLOUDFLARE_API_TOKEN`  | 是   | 在 [API Tokens](https://dash.cloudflare.com/profile/api-tokens) 创建。建议用 **Edit Cloudflare Workers** 模板，或自定义并勾选：**Account** → Workers Scripts → Edit，**Account** → Account Settings → Read；可选 **User** → User Details → Read（避免 “Unable to retrieve email” 提示）。 |
+| `CLOUDFLARE_ACCOUNT_ID` | 是   | **必须与上述 Token 所属账号一致**，否则会报 `Authentication error [code: 10000]`。在 [Dashboard](https://dash.cloudflare.com) 右侧栏或 Workers 页 URL 中可见（如 `dash.cloudflare.com/<account_id>/workers`）。                                                                           |
+
+推送 **main** 或 **master** 分支即可触发部署（`.github/workflows/publish.yml`）。
+
+### 若出现 Authentication error [code: 10000]
+
+1. **确认 `CLOUDFLARE_ACCOUNT_ID` 已设置**：在仓库 Settings → Secrets and variables → Actions 中必须存在且非空。
+2. **确认 Account ID 与 Token 一致**：Token 是在哪个账号下创建的，`CLOUDFLARE_ACCOUNT_ID` 就填该账号的 ID（登录 Cloudflare → 进入该账号 → 右侧或 Workers 页 URL 中的 ID）。
+3. **确认 Token 权限**：进入 [API Tokens](https://dash.cloudflare.com/profile/api-tokens) → 编辑该 Token，确保包含 **Workers Scripts: Edit** 和 **Account Settings: Read**。
+4. 修改 Secrets 后重新推送或手动 re-run 该 workflow。
 
 ## 5. 自定义域名
 
