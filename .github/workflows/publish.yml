@@ -1,0 +1,60 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - uses: pnpm/action-setup@v3
+        name: Install pnpm
+        with:
+          version: 8
+          run_install: false
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - uses: actions/cache@v3
+        name: Setup pnpm cache
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build
+        run: npm run build
+
+      - name: Deploy
+        uses: cloudflare/wrangler-action@v3
+        with:
+          packageManager: pnpm
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          environment: production
+          # 可选：需要通知时在仓库 Secrets 中配置并取消下方注释
+          # secrets: |
+          #   SECRET_SLACK_WEBHOOK_URL
+          #   SECRET_DISCORD_WEBHOOK_URL
+          # env:
+          #   SECRET_SLACK_WEBHOOK_URL: ${{ secrets.SECRET_SLACK_WEBHOOK_URL }}
+          #   SECRET_DISCORD_WEBHOOK_URL: ${{ secrets.SECRET_DISCORD_WEBHOOK_URL }}

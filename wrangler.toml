@@ -1,16 +1,24 @@
-name = "cf-workers-status-page"
+# 部署前：运行 npx wrangler kv:namespace create cf-workers-status-page 获取 id，替换下方 YOUR_KV_NAMESPACE_ID
+# 并将 account_id 改为你的 Cloudflare Account ID（或留空由 CI 环境变量提供）
+name = "nao-status-page"
+main = "./src/worker/index.ts"
+compatibility_flags = [ "streams_enable_constructors" ]
+compatibility_date = "2021-09-29"
 workers_dev = true
-main = "worker-entry.js"
-compatibility_date = "2021-07-23"
-
-[triggers]
-crons = ["*/5 * * * *"]
+account_id = "1c7bfcd21b49416992bd7fb66a72c45d"
+kv_namespaces = [ { binding = "KV_STORE", id = "1c7bfcd21b49416992bd7fb66a72c45d" } ]
 
 [site]
-bucket = "out"
+bucket = "./dist/client"
 
-# uncomment and adjust following if you are not using GitHub Actions
-#[env.production]
-#kv-namespaces = [{binding="KV_STATUS_PAGE", id="xxxx", preview_id=""}]
-#zone_id="xxx"
-#route="xxx"
+[dev]
+port = 3000
+
+[env.production]
+kv_namespaces = [ { binding = "KV_STORE", id = "1c7bfcd21b49416992bd7fb66a72c45d" } ]
+
+[env.production.triggers]
+crons = [
+  # 每 5 分钟检查监控
+  "*/5 * * * *",
+]
