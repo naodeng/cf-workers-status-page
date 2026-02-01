@@ -1,4 +1,4 @@
-# NAO's Status Page
+# NAO'S Status Page
 
 基于 Cloudflare Workers + KV + CRON 的状态页，用于监控 [inaodeng.com](https://inaodeng.com) 及子站可用性。
 
