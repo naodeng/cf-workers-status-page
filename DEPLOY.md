@@ -8,15 +8,22 @@
 pnpm install
 ```
 
-## 2. 创建 KV 并修改 wrangler.toml
+## 2. KV 命名空间并修改 wrangler.toml
+
+**Wrangler 4** 使用空格子命令（不是冒号）：
 
 ```bash
-npx wrangler kv:namespace create cf-workers-status-page
+# 若尚未创建，先创建
+npx wrangler kv namespace create cf-workers-status-page
 ```
 
-将返回的 `id` 填入 **wrangler.toml**，替换两处 `YOUR_KV_NAMESPACE_ID`（顶层和 `[env.production]`）。
+若提示「namespace with this title already exists」，说明已存在，可列出并记下 id：
 
-在 **wrangler.toml** 中把 `account_id = ""` 改成你的 Cloudflare Account ID。
+```bash
+npx wrangler kv namespace list
+```
+
+将得到的 **id** 填入 **wrangler.toml**，替换两处 `YOUR_KV_NAMESPACE_ID`（顶层和 `[env.production]`）。无需在 wrangler.toml 里写 account_id，CI 用 GitHub Secret，本地用 `wrangler login` 或环境变量。
 
 ## 3. 本地运行
 
