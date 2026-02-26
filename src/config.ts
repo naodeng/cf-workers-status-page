@@ -10,7 +10,7 @@ export const config: Config = {
   },
   monitors: [
     { id: 'inaodeng.com', name: 'inaodeng.com', description: 'Personal Blog', url: 'https://inaodeng.com', method: 'GET', expectStatus: 200, followRedirect: false },
-    { id: 'qaprompt.inaodeng.com', name: 'Awesome QA Prompt', description: 'Professional Quality Assurance AI Prompt Library.', url: 'https://qaprompt.inaodeng.com/', method: 'GET', expectStatus: 200, followRedirect: false },
+    { id: 'qaprompt.inaodeng.com', name: 'Awesome QA Prompt', description: 'Professional Quality Assurance AI Prompt Library.', url: 'https://qaprompt.inaodeng.com/', method: 'GET', expectStatus: 301, followRedirect: false },
     { id: 'naodeng.com.cn', name: 'naodeng.com.cn', description: 'You write code. They handle the rest.', url: 'https://naodeng.com.cn/', method: 'GET', expectStatus: 301, followRedirect: false },
     { id: 'email.naodeng.com.cn', name: 'email.naodeng.com.cn', description: 'Built for anything connected to the Internet.', url: 'https://email.naodeng.com.cn', method: 'GET', expectStatus: 200 },
     { id: 'lobe.naodeng.com.cn', name: 'lobe.naodeng.com.cn', description: 'Built for anything connected to the Internet.', url: 'https://lobe.naodeng.com.cn', method: 'GET', expectStatus: 302 },
